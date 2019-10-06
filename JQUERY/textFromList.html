@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script
+    src="http://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+   
+    <ul id="items">
+        <li>first item</li>
+        <li>second item</li>
+        <li>third item</li>
+        </ul>
+    <button onclick="extractText()">Extract Text</button>
+    <div id="result"></div>
+
+    <script>
+        function extractText() {
+            let items = $("ul#items li").toArray().map(li => li.textContent).join(", ");
+            $("#result").text(items);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> Add and delete items</title>
+</head>
+<body>
+
+    <h1>List of Items</h1>
+
+    <ul id="items"></ul>
+
+    <input type="text" id="newText" />
+
+    <input type="button" value="Add" onclick="addItem()">
+
+<script>
+    // 1 решение 
+    // function addItem() { 
+    //     let text = document.getElementById("newText").value;
+    //     let li = document.createElement("li");
+    //     let items = document.getElementById("items");       
+    //     li.textContent = text;
+    //     items.appendChild(li);
+    //     document.getElementById("newText").value = '';
+    
+    // function deleteItem() {  }
+    //     let span = document.createElement("span");
+    //     span.innerHTML = " <a href = '#'> [Delete] </a>";
+    //     li.appendChild(span);
+    //     span.addEventListener("click", function () {
+    //         alert("Are you sure u want to delete this?");
+    //         let li = span.parentNode;
+    //         li.parentNode.removeChild(li);
+    //     });
+    // }
+
+    function addItem() {
+        const input = document.getElementById('newText');
+        const itemsElement = document.getElementById('items')
+        const newLi = createElement('li', input.value + ' ');
+        const aEleAttribute = { name: 'href', value: '#' };
+        const aEleEventListener = { type: 'click', func: deleteItem };
+        const deleteLink = createElement('a', '[Delete]', aEleAttribute, aEleEventListener);
+        appendChildren(newLi,[deleteLink]);
+        appendChildren(itemsElement, [newLi]);
+        clearText(input);
+
+        function deleteItem() { itemsElement.removeChild(this.parentNode); }
+
+        function createElement(tagElement, text, attr, eListener) {
+            const element = document.createElement(tagElement);
+            element.textContent = text;
+            if (attr) element.setAttribute(attr.name, attr.value);
+            if (eListener) element.addEventListener(eListener.type, eListener.func);
+            return element;
+        }
+
+        function clearText(element){ element.value = ''; }
+
+        function appendChildren(parent, childs){
+            childs.forEach((child) => parent.appendChild(child));
+        }
+    }
+</script>
+</body>
+</html>
